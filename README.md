@@ -1,0 +1,1 @@
+#### This tool converts lower resolution images to higher resolution

@@ -4,7 +4,7 @@ using namespace std;
 
 #import "bitmap_image.hpp"
 
-bitmap_image expand_image(std::tuple<int, int> oldRes, std::tuple<int, int> newRes, bitmap_image oldImg, vector<vector<rgb_t>> diff) {
+void expand_image(std::tuple<int, int> oldRes, std::tuple<int, int> newRes, bitmap_image oldImg, vector<vector<rgb_t>> diff) {
     int fact = std::get<0>(newRes) * std::get<1>(newRes) / std::get<0>(oldRes) * std::get<1>(oldRes);
     bitmap_image newImg(std::get<0>(newRes), std::get<0>(newRes));
     int newW = std::get<0>(newRes), newH = std::get<1>(newRes);
@@ -58,13 +58,9 @@ vector<vector<rgb_t> > getDiff (string input){
 }
 
 
-// int main(int argc, char *argv[]){
-//    vector<vector<rgb_t> > diff; 
-//    diff = getDiff(argv[1]);
-//    for (auto &row : diff ){
-//       for (auto &col: row){
-//          cout<<(int)col.blue;
-//       }
-//       cout<<endl;
-//    }  
-// }
+int main(int argc, char *argv[]){
+   vector<vector<rgb_t> > diff; 
+   diff = getDiff(argv[1]);
+   bitmap_image old("480p.bmp");
+   expand_image(std::make_tuple<int, int>(480,640),std::make_tuple<int, int>(720, 1080), old, diff);
+}

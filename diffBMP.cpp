@@ -2,6 +2,35 @@
 #include "bitmap_image.hpp"
 using namespace std;
 
+#import "bitmap_image.hpp"
+
+bitmap_image expand_image(std::tuple<int, int> oldRes, std::tuple<int, int> newRes, bitmap_image oldImg, vector<vector<rgb_t>> diff) {
+    int fact = std::get<0>(newRes) * std::get<1>(newRes) / std::get<0>(oldRes) * std::get<1>(oldRes);
+    bitmap_image newImg(std::get<0>(newRes), std::get<0>(newRes));
+    int newW = std::get<0>(newRes), newH = std::get<1>(newRes);
+    if (fact == 4) {
+        for (int i=0; i<newH; ++i) {
+            if (i%2 == 0) {
+                for (int j=0; j<newW; ++j) {
+                    if (j%2 == 0) {
+                        newImg.set_pixel(i,j,oldImg.get_pixel(i/2,j/2));
+                    }
+                    else {
+                        newImg.set_pixel(i,j,diff.at(i).at((j-1)/2);
+                    }
+                }
+            } else {
+                for (int j=0; j<newW; ++j) {
+                    newImg.set_pixel(i,j,diff.at(i).at(j));
+                }
+            }
+        }
+    }
+    else {
+        throw std::logic_error("Not implemented for this res")
+    }
+    newImg.save_image("expanded.bmp");
+}
 
 vector<vector<rgb_t> > getDiff (string input){
    vector<vector<rgb_t> > diff; 

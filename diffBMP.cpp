@@ -1,41 +1,41 @@
 #include <cstdio>
 #include "bitmap_image.hpp"
+using namespace std;
 
 
-
-
-
-
-int main(int argc, char *argv[]){
-
-
-   bitmap_image image("input.bmp");
-
-   if (!image)
-   {
-      printf("Error - Failed to open: input.bmp\n");
-      return 1;
+vector<vector<rgb_t> > getDiff (string input){
+   vector<vector<rgb_t> > diff; 
+   bitmap_image image(input);
+   if (!image){
+      printf("Error - Failed to open file\n");
+      return diff;
    }
 
-   unsigned int total_number_of_pixels = 0;
 
    const unsigned int height = image.height();
    const unsigned int width  = image.width();
-
-   for (std::size_t y = 0; y < height; ++y)
-   {
-      for (std::size_t x = 0; x < width; ++x)
-      {
-         rgb_t colour;
-
-         image.get_pixel(x, y, colour);
-
-         if (colour.red >= 111)
-            total_number_of_pixels++;
+   vector<rgb_t> row;
+   for (std::size_t y = 0; y < height; ++y){
+      for (std::size_t x = 0; x < width; ++x){
+         if (y % 2 == 1 || x % 2 == 1){
+            rgb_t colour;
+            image.get_pixel(x, y, colour);
+            row.push_back(colour);
+         }
       }
+      diff.push_back(row);
    }
-
-   printf("Number of pixels with red >= 111: %d\n",total_number_of_pixels);
-
-   return 0;
+   return diff;
 }
+
+
+// int main(int argc, char *argv[]){
+//    vector<vector<rgb_t> > diff; 
+//    diff = getDiff(argv[1]);
+//    for (auto &row : diff ){
+//       for (auto &col: row){
+//          cout<<(int)col.blue;
+//       }
+//       cout<<endl;
+//    }  
+// }

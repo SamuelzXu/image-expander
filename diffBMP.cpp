@@ -2,6 +2,9 @@
 #include "bitmap_image.hpp"
 using namespace std;
 
+// generateDiff(string, string) 
+// generates the diff, which is used by expand_image to expand the lower
+// resolution image.
 void generateDiff (string lowRes, string highRes){
    bitmap_image lowResImage(lowRes);
    bitmap_image highResImage(highRes);

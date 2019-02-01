@@ -2,6 +2,9 @@
 #include "bitmap_image.hpp"
 using namespace std;
 
+// expand_image(bitmap_image, bitmap_image):
+// recieves the old image and image diff as parameters to 
+// construct the image of higher resolution.
 void expand_image(bitmap_image oldImg, bitmap_image diff) {
     bitmap_image newImg(1280,720);
     int newH = 720, newW = 1280;

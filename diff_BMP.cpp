@@ -73,7 +73,7 @@ void generateDiff (string lowRes, string highRes){
    const unsigned int width  = highResImage.width();
    // iterating through blocks, x and y indicate the top left positions of each block.
    int diffX = 0;
-   int dffY = 0;
+   int diffY = 0;
    for (std::size_t y=0; y<height; y+= highFactor) {
       for (std::size_t x=0; x<width; x+= highFactor) {
          // iterating through inner block pixels, innerX and innerY indicate the current position of the block we are at.
